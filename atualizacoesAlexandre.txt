@@ -1,0 +1,72 @@
+CRIAÇÃO DO DOCKER PARA CONSEGUIR RODAR EM AMBIENTE DE DESENVOLVIMENTO 
+
+1. Defini a “receita” da imagem (Dockerfile)
+Arquivo: MeuProjeto/Dockerfile (line 1)
+
+Eu configurei:
+
+FROM python:3.12-slim: base da imagem (Python enxuto).
+WORKDIR /app: diretório de trabalho dentro do container.
+COPY requirements.txt ... + RUN pip install ...: instala dependências Python.
+COPY MeuSite /app/MeuSite: copia seu código Django para dentro da imagem.
+EXPOSE 8000: documenta a porta usada.
+CMD ... migrate && runserver: ao iniciar o container, aplica migrações e sobe servidor Django em 0.0.0.0:8000.
+Ideia: o Dockerfile é o “passo a passo” para montar a imagem da sua app.
+
+2. Criei a orquestração (docker-compose.yml)
+Arquivo: docker-compose.yml (line 1)
+
+Eu configurei um serviço web com:
+
+build.context: ./MeuProjeto: onde o build da imagem acontece.
+dockerfile: Dockerfile: qual arquivo usar para montar a imagem.
+ports: "8000:8000": porta do host → porta do container.
+volumes: ./MeuProjeto/MeuSite:/app/MeuSite: monta seu código local dentro do container (bom para desenvolvimento).
+environment: DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1: injeta variável para hosts permitidos.
+command: reforça o comando de subir (migrate + runserver).
+Ideia: o Compose simplifica “build + run” com um único comando.
+
+3. Evitei copiar lixo para a imagem (.dockerignore)
+Arquivo: MeuProjeto/.dockerignore (line 1)
+
+Eu ignorei itens como:
+
+venv/
+__pycache__/
+.git/
+caches e arquivos temporários
+Ideia: build mais rápido e imagem menor.
+
+4. Corrigi dependências para o build funcionar (requirements.txt)
+Arquivo: MeuProjeto/requirements.txt (line 1)
+
+O arquivo estava vazio. Eu coloquei:
+
+Django==6.0.3
+Ideia: sem isso, pip install -r requirements.txt não instala nada.
+
+5. Ajustei o Django para aceitar acesso via container (ALLOWED_HOSTS)
+Arquivo: settings.py (line 29)
+
+Antes estava fixo vazio ([]).
+Eu mudei para ler variável de ambiente:
+
+DJANGO_ALLOWED_HOSTS (com fallback para localhost,127.0.0.1)
+Ideia: evita erro de host inválido ao acessar a app em container.
+
+6. Documentei no README como subir
+Arquivo: README.md (line 3)
+
+Adicionei comandos:
+
+docker compose build
+docker compose up
+acesso em http://localhost:8000
+docker compose down para parar
+Fluxo completo que ficou pronto
+
+docker compose build monta a imagem usando o Dockerfile.
+docker compose up cria/roda o container.
+O container executa migração e sobe o Django.
+Você acessa pelo navegador em localhost:8000.
+Se quiser, no próximo passo eu te explico também a diferença entre essa configuração de desenvolvimento (com volume + runserver) e uma versão de produção (Gunicorn + Nginx + DEBUG=False).
