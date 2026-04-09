@@ -11,3 +11,9 @@ def segundaPagina(request):
 
 def catalogo(request):
     return render(request, 'MeuApp/catalogo.html')
+
+def login(request):
+    return render(request, 'MeuApp/login.html')
+
+def registro(request):
+    return render(request, 'MeuApp/registro.html')
