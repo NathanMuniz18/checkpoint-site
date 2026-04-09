@@ -8,3 +8,6 @@ def home(request):
 def segundaPagina(request):
 # processamento antes de mostrar a segunda página
     return render(request, 'MeuApp/segunda.html')
+
+def catalogo(request):
+    return render(request, 'MeuApp/catalogo.html')

@@ -25,8 +25,8 @@
         <nav class="main-nav" aria-label="Menu principal">
             <div class="logo">CHECKPOINT</div>
             <ul class="menu-list">
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Catálogo</a></li>
+                <li><a href="{% url 'MeuApp:homepage'%}">Início</a></li>
+                <li><a href="{% url 'MeuApp:catalogo'%}">Catálogo</a></li>
                 <li><a href="#">Notícias</a></li>
                 <li><a href="#">Sugestões</a></li>
             </ul>
@@ -43,7 +43,7 @@
                     <p class="hero-description">
                         Aqui o seu jogo é o seu mundo!
                     </p>
-                    <a href="#" class="cta-primary">Ver Jogos</a>
+                    <a href="{% url 'MeuApp:catalogo'%}" class="cta-primary">Ver Jogos</a>
                 </div>
             </div>
         </section>
@@ -54,18 +54,16 @@
                 <div class="highlight-body">
                     <h3>Quem somos</h3>
                     <p>
-                        Somos estudantes apaixonados por tecnologia e games, criando um
-                        espaco para compartilhar experiencias, ideias e aprendizado.
+                        Somos estudantes apaixonados por tecnologia e games, criando um espaco para compartilhar experiências, ideias e aprendizado.
                     </p>
                 </div>
             </article>
             <article class="highlight-item">
                 <img class="highlight-image" src="{% static 'MeuApp/img/o-que-e-checkpoint.jpg' %}" alt="Tela com diversos jogos e controles">
                 <div class="highlight-body">
-                    <h3>O que e o checkpoint</h3>
+                    <h3>O que é o checkpoint</h3>
                     <p>
-                        O Checkpoint e um site para reunir catalogo de jogos, noticias
-                        e recomendacoes em um unico lugar para a comunidade gamer.
+                        O Checkpoint é um site para reunir catálogo de jogos, notícias e recomendacoes em um unico lugar para a comunidade gamer.
                     </p>
                 </div>
             </article>
@@ -74,8 +72,7 @@
                 <div class="highlight-body">
                     <h3>Valores</h3>
                     <p>
-                        Priorizamos respeito, colaboracao e diversidade, acreditando
-                        que o jogo fica melhor quando todo mundo tem voz.
+                        Priorizamos respeito, colaboração e diversidade, acreditando que o jogo fica melhor quando todo mundo se respeita.
                     </p>
                 </div>
             </article>
@@ -84,7 +81,7 @@
 
     <footer class="site-footer">
         <p>Desenvolvido por Alexandre e Nathan</p>
-        <a href="{% url 'MeuApp:segunda' %}">Ir para a Segunda Pagina</a>
+        <a href="{% url 'MeuApp:segunda' %}">Ir para a Segunda Página</a>
     </footer>
 </body>
 </html>
