@@ -6,4 +6,5 @@ app_name = 'MeuApp'
 urlpatterns = [
     path('', views.home, name='homepage'),
     path('SegundaPagina/',views.segundaPagina,name='segunda'),
+    path('catalogo/',views.catalogo,name='catalogo'),
 ]
