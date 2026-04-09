@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Barlow:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-deep: #090419;
+    --bg-panel: rgba(8, 10, 37, 0.85);
+    --text-main: #f2f5ff;
+    --text-muted: #c8cce4;
+    --line-soft: rgba(226, 80, 252, 0.35);
+    --accent: #f624ff;
+    --highlight: #23b7ff;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Barlow', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(175deg, rgba(13, 8, 35, 0.88), rgba(6, 3, 21, 0.9)),
+        radial-gradient(circle at 20% 10%, rgba(247, 63, 255, 0.28), transparent 38%),
+        radial-gradient(circle at 80% 30%, rgba(47, 161, 255, 0.24), transparent 40%);
+}
+
+.login-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px;
+    padding: 2.5rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(246, 36, 255, 0.15);
+}
+
+.login-box h1 {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--text-main);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.85rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(246,36,255,0.3);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: white;
+    border: 2px solid var(--accent);
+    color: #2a0f42;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 rgba(246,36,255,0.35);
+}
+
+.register-link {
+    margin-top: 1.5rem;
+    text-align: center;
+   color: #ffffff;
+}
+
+.auth-link {
+    color: var(--highlight);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 0.4rem;
+}
+
+.auth-link:hover {
+    color: var(--accent);
+}
+
