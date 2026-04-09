@@ -1,0 +1,13 @@
+services:
+  web:
+    build:
+      context: ./MeuProjeto
+      dockerfile: Dockerfile
+    container_name: checkpoint-web
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./MeuProjeto/MeuSite:/app/MeuSite
+    environment:
+      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
