@@ -1,11 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>checkpoint | Registro</title>
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/registro.css' %}">
 </head>
 <body>
-    cadastro usuario
+
+<div class="login-wrapper">
+    <div class="login-box">
+
+        <h1>Registro</h1>
+        <p class="subtitle">Crie sua conta</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Usuário</label>
+                {{ form_usuario.username }}
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                {{ form_usuario.email }}
+            </div>
+
+            <div class="input-group">
+                <label>Senha</label>
+                {{ form_usuario.password1 }}
+            </div>
+
+            <div class="input-group">
+                <label>Confirmar Senha</label>
+                {{ form_usuario.password2 }}
+            </div>
+
+            <button type="submit" class="login-btn">Cadastrar</button>
+        </form>
+
+        <div class="register-link">
+            <span>Já tem conta?</span>
+            <a href="{% url 'MeuApp:login' %}" class="auth-link">Entrar</a>
+        </div>
+
+    </div>
+</div>
+
 </body>
 </html>

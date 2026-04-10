@@ -1,3 +1,4 @@
+```html
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,17 +15,33 @@
         <h1>Login</h1>
         <p class="subtitle">Acesse sua conta</p>
 
+        {% if form.errors %}
+            <div class="alert" style="color: #d93025; background-color: #fce8e6; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px;">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p style="margin: 0; padding-bottom: 4px;">
+                            <strong>{{ field.label }}:</strong> {{ error }}
+                        </p>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <p style="margin: 0;">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form method="POST">
             {% csrf_token %}
 
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email" required>
+                <label>Usuário</label>
+                <input type="text" name="username" required>
             </div>
 
             <div class="input-group">
                 <label>Senha</label>
-                <input type="password" name="senha" required>
+                <input type="password" name="password" required>
             </div>
 
             <button type="submit" class="login-btn">Entrar</button>
@@ -40,4 +57,4 @@
 
 </body>
 </html>
-
+```
