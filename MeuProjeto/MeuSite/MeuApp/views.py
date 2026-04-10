@@ -37,7 +37,7 @@ def login(request):
 
     return render(request, 'MeuApp/login.html', {'form': form})
 
-def logout(request):
+def logout_view(request):
     logout(request)
     return redirect('MeuApp:homepage')
 
