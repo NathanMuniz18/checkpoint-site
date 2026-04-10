@@ -6,8 +6,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 
 def home(request):
-    logout(request)
     return render(request, 'MeuApp/home.html')
+
+def perfil(request):
+    if not request.user.is_authenticated:
+        return redirect('MeuApp:login')
+    
+    pessoa = Pessoa.objects.filter(usuario=request.user).first()
+    return render(request, 'MeuApp/perfil.html', {'pessoa': pessoa})
 
 def segundaPagina(request):
     return render(request, 'MeuApp/segunda.html')
@@ -31,9 +37,9 @@ def login(request):
 
     return render(request, 'MeuApp/login.html', {'form': form})
 
-# def logout(request):
-#     logout(request)
-#     return redirect('MeuApp:homepage')
+def logout(request):
+    logout(request)
+    return redirect('MeuApp:homepage')
 
 def registro(request):
     if request.method == 'POST':

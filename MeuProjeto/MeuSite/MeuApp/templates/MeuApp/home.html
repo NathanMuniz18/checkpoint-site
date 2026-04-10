@@ -31,7 +31,10 @@
                 <li><a href="#">Sugestões</a></li>
             </ul>
            {% if user.is_authenticated %}
-                <span class="auth-link">Olá, {{ user.username }}</span> 
+                <ul class="menu-list">
+                    <li><a href="{% url 'MeuApp:perfil'%}">Olá, {{ user.username }}</a></li>
+                    <li><a href="{% url 'MeuApp:logout' %}">Logout</a></li>
+                </ul>
 
            {% else %} 
                 <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
