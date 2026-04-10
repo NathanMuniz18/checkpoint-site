@@ -21,6 +21,9 @@ def segundaPagina(request):
 def catalogo(request):
     return render(request, 'MeuApp/catalogo.html')
 
+def noticias(request):
+    return render(request, 'MeuApp/noticias.html')
+
 def login(request):
     # Se o usuário clicou no botão de Entrar (enviou os dados)
     if request.method == 'POST':
