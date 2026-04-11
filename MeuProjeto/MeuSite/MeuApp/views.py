@@ -114,4 +114,14 @@ def registro(request):
     )
 
 def jornada(request):
-    return render(request, 'MeuApp/jornada.html')
+    pessoa = None
+    if request.user.is_authenticated:
+        pessoa = Pessoa.objects.filter(usuario=request.user).first()
+
+    return render(
+        request,
+        'MeuApp/jornada.html',
+        {
+            'pessoa': pessoa,
+        },
+    )

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkpoint | Catálogo</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/conquista.css' %}">
+    <title>Checkpoint | Jornada</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/jornada.css' %}">
 </head>
 <body>
     <main>
@@ -26,12 +26,11 @@
         
            <nav class="main-nav" aria-label="Menu principal">
                 <div class="logo"><a href="{% url 'MeuApp:homepage' %}">CHECKPOINT</a></div>
-                <ul class="menu-list">
-                    
+                <ul class="menu-list --center">
+                    <li><strong> MINHA JORNADA</strong></li>
                 </ul>
             {% if user.is_authenticated %}
                     <ul class="menu-list">
-                        <li><a href="{% url 'MeuApp:perfil'%}">Olá, {{ user.username }}</a></li>
                         <li><a class="logout-link" href="{% url 'MeuApp:logout' %}">Logout</a></li>
                     </ul>
 
@@ -39,13 +38,6 @@
                     <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
             </nav>
         </header>
-        <section>
-            <div class="hero-overlay">
-                <div class="hero-content">
-                    <p class="hero-kicker">EM CONSTRUÇÃO!</p>
-                </div>
-            </div>
-        </section>
     </main>
     <footer class="site-footer">
         <p>Desenvolvido por Alexandre e Nathan</p>
