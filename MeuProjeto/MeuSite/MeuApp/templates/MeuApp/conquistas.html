@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Catálogo</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/catalogo.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/conquista.css' %}">
 </head>
 <body>
     <main>
@@ -23,15 +23,20 @@
                 </div>
             </div>
             -->
-            <nav class="main-nav" aria-label="Menu principal">
-                <div class="logo">CHECKPOINT</div>
+        
+           <nav class="main-nav" aria-label="Menu principal">
+                <div class="logo"><a href="{% url 'MeuApp:homepage' %}">CHECKPOINT</a></div>
                 <ul class="menu-list">
-                    <li><a href="{% url 'MeuApp:homepage'%}">Início</a></li>
-                    <li><a href="{% url 'MeuApp:catalogo'%}">Catálogo</a></li>
-                    <li><a href="#">Notícias</a></li>
-                    <li><a href="#">Sugestões</a></li>
+                    
                 </ul>
-                <a href="#" class="auth-link">Login / Register</a>
+            {% if user.is_authenticated %}
+                    <ul class="menu-list">
+                        <li><a href="{% url 'MeuApp:perfil'%}">Olá, {{ user.username }}</a></li>
+                        <li><a class="logout-link" href="{% url 'MeuApp:logout' %}">Logout</a></li>
+                    </ul>
+
+            {% else %} 
+                    <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
             </nav>
         </header>
         <section>
@@ -42,6 +47,9 @@
             </div>
         </section>
     </main>
+    <footer class="site-footer">
+        <p>Desenvolvido por Alexandre e Nathan</p>
+    </footer>
     
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Home</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}?v=11">
 </head>
 <body>
     <header class="site-header">
@@ -22,26 +22,35 @@
             </div>
         </div>
         -->
+        
         <nav class="main-nav" aria-label="Menu principal">
             <div class="logo">CHECKPOINT</div>
-            <ul class="menu-list">
-                <li><a href="{% url 'MeuApp:homepage'%}">Início</a></li>
-                <li><a href="{% url 'MeuApp:catalogo'%}">Catálogo</a></li>
-                <li><a href="{% url 'MeuApp:noticias'%}">Notícias</a></li>
-                <li><a href="#">Sugestões</a></li>
-            </ul>
            {% if user.is_authenticated %}
-                <ul class="menu-list">
-                    <li><a href="{% url 'MeuApp:perfil'%}">Olá, {{ user.username }}</a></li>
-                    <li><a href="{% url 'MeuApp:logout' %}">Logout</a></li>
+                <ul class="menu-list menu-list--center">
+                    <li><a href="{% url 'MeuApp:jornada' %}">Jornada</a></li>
+                    <li><a href="{% url 'MeuApp:conquistas' %}">Conquistas</a></li>
+                </ul>
+                <ul class="menu-list menu-list--auth">
+                    <li><a href="{% url 'MeuApp:perfil'%}">Editar Perfil</a></li>
+                    <li><a class="logout-link" href="{% url 'MeuApp:logout' %}">Logout</a></li>
                 </ul>
 
            {% else %} 
+           <ul class="menu-list menu-list--center">
+            <li>
+                <span class="brand-mini">Bem-vindo!</span>
+            </li>
+           </ul>
+           <ul class="menu-list menu-list--center">
                 <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
+            </ul>
+                
         </nav>
     </header>
+    
 
     <main>
+        {% if not user.is_authenticated %}
         <section class="hero" aria-label="Destaque principal">
             <div class="hero-overlay">
                 <div class="hero-content">
@@ -50,7 +59,7 @@
                     <p class="hero-description">
                         A vida é curta. O backlog, não.
                     </p>
-                    <a href="{% url 'MeuApp:catalogo'%}" class="cta-primary">Minha Jornada</a>
+                    <a href="{% url 'MeuApp:login'%}" class="cta-primary">Entre</a>
                 </div>
             </div>
         </section>
@@ -84,11 +93,56 @@
                 </div>
             </article>
         </section>
-    </main>
+        {% else %}
+        <section class="welcome-shell" aria-label="Boas-vindas">
+            <article class="welcome-user-card" aria-label="Perfil do usuário">
+                <div class="welcome-avatar-wrap">
+                    {% if pessoa and pessoa.foto %}
+                        <img class="welcome-avatar-image" src="{{ pessoa.foto }}" alt="Foto de perfil de {{ user.username }}" referrerpolicy="no-referrer" loading="lazy">
+                    {% else %}
+                        <div class="welcome-avatar-placeholder" aria-hidden="true">{{ user.username|first|upper }}</div>
+                    {% endif %}
+                </div>
+                <div class="welcome-user-info">
+                    <h3>{{ user.username }}</h3>
+                    <p>{{ pessoa.bio }}</p>
+                </div>
+            </article>
 
+            <article class="welcome-hero-card">
+                <p class="welcome-kicker">SESSAO ATIVA</p>
+                <h2>Bem-vindo de volta, Gamer!</h2>
+                <p class="welcome-description">
+                    Seu checkpoint está salvo. Continue de onde parou, explore o catálogo e descubra novidades da comunidade.
+                </p>
+            </article>
+        </section>
+
+        <section class="welcome-grid" aria-label="Atalhos principais">
+
+            <article class="welcome-tile welcome-tile--games">
+                <h3>Minhas Conquistas</h3>
+                <p>Confira o progresso de suas conquistas.</p>
+                <a href="{% url 'MeuApp:conquistas' %}">Ver Conquistas</a>
+            </article>
+
+            <article class="welcome-tile welcome-tile--my-games">
+                <h3>Minha Jornada</h3>
+                <p>Acesse sua biblioteca pessoal e continue as partidas que você acompanha.</p>
+                <a href="{% url 'MeuApp:jornada' %}">Abrir minha jornada</a>
+            </article>
+        </section>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+       <section class="home-final-banner" aria-label="Imagem destaque final">
+            <img class="home-final-banner-image" src="{% static 'MeuApp/img/play.jpg' %}" alt="Imagem de destaque do Checkpoint">
+        </section>
+        {%endif%}
+
+    </main>
     <footer class="site-footer">
         <p>Desenvolvido por Alexandre e Nathan</p>
-        <a href="{% url 'MeuApp:segunda' %}">Ir para a Segunda Página</a>
     </footer>
 </body>
 </html>

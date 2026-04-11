@@ -5,12 +5,10 @@ app_name = 'MeuApp'
 
 urlpatterns = [
     path('', views.home, name='homepage'),
-    path('SegundaPagina/',views.segundaPagina,name='segunda'),
-    path('catalogo/',views.catalogo,name='catalogo'),
+    path('conquistas/',views.conquistas,name='conquistas'),
     path('login/',views.login,name='login'),
     path('registro/',views.registro,name='registro'),
     path('logout/', views.logout_view, name='logout'),
     path('perfil/', views.perfil, name='perfil'),
-    path('noticias/', views.noticias, name='noticias'),
-    
+    path('jornada/', views.jornada, name='jornada'),
 ]

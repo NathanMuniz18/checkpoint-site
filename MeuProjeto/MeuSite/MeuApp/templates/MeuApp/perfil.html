@@ -5,90 +5,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Perfil</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}?v=11">
     <link rel="stylesheet" href="{% static 'MeuApp/css/perfil.css' %}">
 </head>
-<body>
+<body class="perfil-page">
     <header class="site-header">
         <nav class="main-nav" aria-label="Menu principal">
-            <div class="logo">CHECKPOINT</div>
-            <ul class="menu-list">
-                <li><a href="{% url 'MeuApp:homepage' %}">Início</a></li>
-                <li><a href="{% url 'MeuApp:catalogo' %}">Catálogo</a></li>
-                <li><a href="#">Notícias</a></li>
-                <li><a href="#">Sugestões</a></li>
-            </ul>
-            {% if user.is_authenticated %}
-                <ul class="menu-list">
-                    <li><a href="{% url 'MeuApp:perfil' %}">Olá, {{ user.username }}</a></li>
-                    <li><a href="{% url 'MeuApp:logout' %}">Logout</a></li>
+            <div class="logo"><a href="{% url 'MeuApp:homepage' %}">CHECKPOINT</a></div>
+           {% if user.is_authenticated %}
+                <ul class="menu-list menu-list--center">
                 </ul>
-            {% else %}
-                <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a>
-            {% endif %}
+                <ul class="menu-list menu-list--auth">
+                    <li><a href="{% url 'MeuApp:perfil'%}">Editar Perfil</a></li>
+                    <li><a class="logout-link" href="{% url 'MeuApp:logout' %}">Logout</a></li>
+                </ul>
+
+           {% else %} 
+           <ul class="menu-list menu-list--center">
+                <li><a href="{% url 'MeuApp:homepage'%}">Início</a></li>
+                <li><a href="{% url 'MeuApp:catalogo'%}">Catálogo</a></li>
+                <li><a href="{% url 'MeuApp:noticias'%}">Notícias</a></li>
+                <li><a href="{% url 'MeuApp:sugestao'%}">Sugestões</a></li>
+            </ul>
+                <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
         </nav>
     </header>
 
     <main>
-        <div class="perfil-wrapper">
-            <div class="perfil-card">
-                <div class="perfil-banner"></div>
-
-                <div class="perfil-header">
-                    <div class="perfil-avatar">
-                        {% if pessoa.foto %}
-                            <img src="{{ pessoa.foto }}" alt="Foto de perfil">
-                        {% else %}
-                            {{ user.username|first|upper }}
-                        {% endif %}
-                    </div>
-                    <div class="perfil-nome">
-                        <h2>{{ user.username }}</h2>
-                        <p>{{ user.email }}</p>
-                    </div>
+        <section class="perfil-grid" aria-labelledby="perfil-titulo">
+            <aside class="perfil-card">
+                <div class="avatar-wrap">
+                    {% if pessoa and pessoa.foto %}
+                        <img class="avatar-image" src="{{ pessoa.foto }}" alt="Foto de perfil de {{ user.username }}" referrerpolicy="no-referrer" loading="lazy">
+                    {% else %}
+                        <div class="avatar-placeholder" aria-hidden="true">{{ user.username|first|upper }}</div>
+                    {% endif %}
                 </div>
 
-                {% if pessoa.bio %}
-                <div class="perfil-bio">
-                    <p>{{ pessoa.bio }}</p>
+                <div class="perfil-identidade">
+                    <h1 id="perfil-titulo">{{ user.username }}</h1>
                 </div>
+
+                <p class="avatar-hint">{{pessoa.bio}}</p>
+            </aside>
+
+            <section class="perfil-editor" aria-label="Editar perfil">
+                <div class="editor-header">
+                    <h2>Editar Perfil</h2>
+                    <p>Atualize seu username, email e bio.</p>
+                </div>
+
+                {% if perfil_salvo %}
+                    <p class="feedback feedback-ok">Perfil atualizado com sucesso.</p>
                 {% endif %}
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="mensagem-sucesso">{{ message }}</p>
-                    {% endfor %}
+                {% if form.non_field_errors %}
+                    <div class="feedback feedback-error">
+                        {% for erro in form.non_field_errors %}
+                            <p>{{ erro }}</p>
+                        {% endfor %}
+                    </div>
                 {% endif %}
 
-                <hr class="divider">
+                <form method="post" class="perfil-form" novalidate>
+                    {% csrf_token %}
 
-                <div class="perfil-form">
-                    <h3>Editar perfil</h3>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Username</label>
-                                {{ form_usuario.username }}
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                {{ form_usuario.email }}
-                            </div>
-                            <div class="form-group full">
-                                <label>Foto (URL)</label>
-                                {{ form_pessoa.foto }}
-                            </div>
-                            <div class="form-group full">
-                                <label>Bio</label>
-                                {{ form_pessoa.bio }}
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-salvar">Salvar alterações</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+                    <div class="field-group">
+                        <label for="{{ form.username.id_for_label }}">Usuário</label>
+                        {{ form.username }}
+                        {% for erro in form.username.errors %}
+                            <span class="field-error">{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field-group">
+                        <label for="{{ form.email.id_for_label }}">Email</label>
+                        {{ form.email }}
+                        {% for erro in form.email.errors %}
+                            <span class="field-error">{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field-group">
+                        <label for="{{ form.bio.id_for_label }}">Bio</label>
+                        {{ form.bio }}
+                        {% for erro in form.bio.errors %}
+                            <span class="field-error">{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field-group">
+                        <label for="{{ form.foto.id_for_label }}">Foto (URL)</label>
+                        {{ form.foto }}
+                        {% for erro in form.foto.errors %}
+                            <span class="field-error">{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit" class="save-btn">Salvar Alterações</button>
+                </form>
+            </section>
+        </section>
     </main>
 
     <footer class="site-footer">

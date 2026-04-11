@@ -11,7 +11,7 @@
 <div class="login-wrapper">
     <div class="login-box">
 
-        <h1>Registro</h1>
+        <h1>Checkpoint</h1>
         <p class="subtitle">Crie sua conta</p>
 
         <form method="POST">
@@ -41,8 +41,9 @@
         </form>
 
         <div class="register-link">
-            <span>Já tem conta?</span>
-            <a href="{% url 'MeuApp:login' %}" class="auth-link">Entrar</a>
+            <ul><span>Já tem conta?<a href="{% url 'MeuApp:login' %}" class="auth-link">Entrar</a></span></ul>
+            <ul><a href="{% url 'MeuApp:homepage' %}" class="auth-link">Voltar para Início</a></ul>
+            
         </div>
 
     </div>

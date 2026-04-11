@@ -10,10 +10,11 @@
 <body>
 
 <div class="login-wrapper">
+    
     <div class="login-box">
 
-        <h1>Login</h1>
-        <p class="subtitle">Acesse sua conta</p>
+        <h1>Checkpoint</h1>
+        <p class="subtitle">Faça o Login</p>
 
         {% if form.errors %}
             <div class="alert" style="color: #d93025; background-color: #fce8e6; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px;">
@@ -48,8 +49,8 @@
         </form>
 
         <div class="register-link">
-            <span>Não tem conta?</span>
-            <a href="{% url 'MeuApp:registro' %}" class="auth-link">Criar conta</a>
+                <ul><span>Não tem conta?</span><a href="{% url 'MeuApp:registro' %}" class="auth-link">Criar conta</a></ul>
+                <ul><a href="{% url 'MeuApp:homepage' %}" class="auth-link">Voltar para Início</a></ul>
         </div>
 
     </div>

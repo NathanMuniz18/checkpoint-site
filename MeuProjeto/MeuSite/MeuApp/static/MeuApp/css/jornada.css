@@ -100,6 +100,11 @@ main,
     text-shadow: 0 0 16px rgba(248, 74, 255, 0.4);
 }
 
+.logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .menu-list {
     margin: 0;
     padding: 0;
@@ -361,4 +366,17 @@ main {
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+.menu-list a.logout-link {
+    color: #ff9edb;
+}
+
+.menu-list a.logout-link::after {
+    background-color: #ff4fcd;
+    width: 100%;
+}
+
+.menu-list a.logout-link:hover {
+    color: #ffd4f0;
 }
