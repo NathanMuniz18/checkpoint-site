@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkpoint | Catálogo</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/conquista.css' %}">
+    <title>Checkpoint | Conquistas</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/conquista.css' %}?v=20260411">
 </head>
 <body>
     <main>
@@ -24,12 +24,10 @@
             </div>
             -->
         
-           <nav class="main-nav" aria-label="Menu principal">
+            <nav class="main-nav" aria-label="Menu principal">
                 <div class="logo"><a href="{% url 'MeuApp:homepage' %}">CHECKPOINT</a></div>
-                <ul class="menu-list">
-                    <ul class="menu-list --center">
-                        <li><strong> MINHA CONQUISTA</strong></li>
-                    </ul>
+                <ul class="menu-list menu-list--center">
+                    <li><strong>MINHAS CONQUISTAS</strong></li>
                 </ul>
             {% if user.is_authenticated %}
                     <ul class="menu-list">
@@ -40,6 +38,116 @@
                     <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
             </nav>
         </header>
+
+        <section class="conquista-shell" aria-label="Painel de conquistas">
+            <article class="patente-card" aria-labelledby="patente-title">
+                <div class="patente-main">
+                    <p class="patente-kicker">PATENTE GLOBAL</p>
+                    <h1 id="patente-title">Comandante Lendário</h1>
+                    <p class="patente-meta">
+                        Jogador:
+                        <strong>{% if user.is_authenticated %}{{ user.username }}{% else %}Visitante{% endif %}</strong>
+                    </p>
+                    <p class="patente-hours">
+                        Total de horas jogadas no Checkpoint:
+                        <strong>438h</strong>
+                    </p>
+                    <p class="patente-text">
+                        Sua patente sobe com a soma de todas as horas registradas em cada jogo.
+                    </p>
+
+                    <div class="progress-head">
+                        <span>Próxima patente: Grão-Mestre</span>
+                        <span>438 / 600h</span>
+                    </div>
+                    <div class="progress-track" aria-hidden="true">
+                        <span class="progress-fill"></span>
+                    </div>
+                </div>
+
+                <aside class="patente-ladder" aria-label="Escala de patentes">
+                    <h2>Escala de Patentes</h2>
+                    <ul>
+                        <li><span>Recruta</span><strong>0h - 24h</strong></li>
+                        <li><span>Veterano</span><strong>25h - 99h</strong></li>
+                        <li><span>Elite</span><strong>100h - 249h</strong></li>
+                        <li><span>Comandante</span><strong>250h - 399h</strong></li>
+                        <li class="is-active"><span>Comandante Lendário</span><strong>400h - 599h</strong></li>
+                        <li><span>Grão-Mestre</span><strong>600h+</strong></li>
+                    </ul>
+                </aside>
+            </article>
+
+            <section class="recompensas-panel" aria-labelledby="recompensas-title">
+                <div class="recompensas-head">
+                    <p class="patente-kicker">POR JOGO</p>
+                    <h2 id="recompensas-title">Recompensas da Sua Jornada</h2>
+                    <p>Layout de exemplo: depois vamos conectar com a lógica real baseada nas horas.</p>
+                </div>
+
+                <div class="recompensas-grid">
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.webp" alt="Capa de Hollow Knight" loading="lazy">
+                        <div class="reward-body">
+                            <h3>Hollow Knight</h3>
+                            <p>Horas registradas: <strong>34h</strong></p>
+                            <p>Patente do jogo: <strong>Caçador de Almas</strong></p>
+                            <div class="reward-tag">Recompensa atual: Tema "Void Trail"</div>
+                        </div>
+                    </article>
+
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.webp" alt="Capa de The Witcher 3" loading="lazy">
+                        <div class="reward-body">
+                            <h3>The Witcher 3</h3>
+                            <p>Horas registradas: <strong>89h</strong></p>
+                            <p>Patente do jogo: <strong>Lobo Prateado</strong></p>
+                            <div class="reward-tag">Recompensa atual: Moldura "Caçador de Monstros"</div>
+                        </div>
+                    </article>
+
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp" alt="Capa de Stardew Valley" loading="lazy">
+                        <div class="reward-body">
+                            <h3>Stardew Valley</h3>
+                            <p>Horas registradas: <strong>62h</strong></p>
+                            <p>Patente do jogo: <strong>Guardião da Fazenda</strong></p>
+                            <div class="reward-tag">Recompensa atual: Selo "Colheita de Ouro"</div>
+                        </div>
+                    </article>
+
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co5wyy.webp" alt="Capa de Elden Ring" loading="lazy">
+                        <div class="reward-body">
+                            <h3>Elden Ring</h3>
+                            <p>Horas registradas: <strong>121h</strong></p>
+                            <p>Patente do jogo: <strong>Lorde das Terras Intermédias</strong></p>
+                            <div class="reward-tag">Recompensa atual: Título "Sem-Mácula Supremo"</div>
+                        </div>
+                    </article>
+
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2l7z.webp" alt="Capa de Hades" loading="lazy">
+                        <div class="reward-body">
+                            <h3>Hades</h3>
+                            <p>Horas registradas: <strong>47h</strong></p>
+                            <p>Patente do jogo: <strong>Fugitivo do Submundo</strong></p>
+                            <div class="reward-tag">Recompensa atual: Emblema "Fúria de Zagreus"</div>
+                        </div>
+                    </article>
+
+                    <article class="reward-card">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.webp" alt="Capa de Minecraft" loading="lazy">
+                        <div class="reward-body">
+                            <h3>Minecraft</h3>
+                            <p>Horas registradas: <strong>85h</strong></p>
+                            <p>Patente do jogo: <strong>Arquiteto de Mundos</strong></p>
+                            <div class="reward-tag">Recompensa atual: Badge "Mestre da Redstone"</div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </section>
     </main>
     <footer class="site-footer">
         <p>Desenvolvido por Alexandre e Nathan</p>

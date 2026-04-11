@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Jornada</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/jornada.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/jornada.css' %}?v=20260411">
 </head>
 <body>
     <main>
@@ -38,6 +38,126 @@
                     <a href="{% url 'MeuApp:login' %}" class="auth-link">Login / Register</a> {% endif %}
             </nav>
         </header>
+
+        <section class="jornada-shell" aria-label="Minha jornada de jogos">
+            <article class="jornada-card jornada-card--form" aria-labelledby="novo-jogo-title">
+                <div class="jornada-card-head">
+                    <p class="jornada-kicker">JOGOS</p>
+                    <h1 id="novo-jogo-title">Adicionar Novo Jogo À Sua Jornada</h1>
+                    <p>Preencha os campos abaixo para cadastrar um novo jogo na sua jornada.</p>
+                </div>
+
+                <form class="jornada-form" method="post" action="#">
+                    <div class="jornada-form-grid">
+                        <label class="field">
+                            <span>Nome do Jogo</span>
+                            <input type="text" name="nome_jogo" placeholder="Ex: Hollow Knight" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Foto do jogo (URL)</span>
+                            <input type="url" name="foto_jogo" placeholder="https://..." required>
+                        </label>
+
+                        <label class="field">
+                            <span>Plataforma</span>
+                            <input type="text" name="plataforma" placeholder="Ex: Steam, Xbox, Switch..." required>
+                        </label>
+
+                        <label class="field">
+                            <span>Tempo jogado (horas)</span>
+                            <input type="number" name="tempo_jogado" min="0" step="0.1" placeholder="0.0" required>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-save" type="submit">Salvar Novo Jogo</button>
+                    </div>
+                </form>
+            </article>
+
+            <article class="jornada-card jornada-card--list" aria-labelledby="lista-jogos-title">
+                <div class="jornada-card-head">
+                    <p class="jornada-kicker">Jogos Salvos</p>
+                    <h2 id="lista-jogos-title">MINHA JORNADA</h2>
+                    <p>Atualize status, horas jogadas ou remova jogos da sua lista.</p>
+                </div>
+
+                <div class="saved-games">
+                    <article class="saved-game">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.webp" alt="Capa do jogo Hollow Knight">
+                        <div class="saved-game-info">
+                            <h3>Hollow Knight</h3>
+                            <p>Plataforma: Steam</p>
+                        </div>
+                        <div class="saved-game-controls">
+                            <label>
+                                <span>Status</span>
+                                <select>
+                                    <option>Vou Jogar</option>
+                                    <option selected>Tô jogando</option>
+                                    <option>Já Zerei</option>
+                                    <option>Desisti</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Horas jogadas</span>
+                                <input type="number" value="34" min="0" step="1.0">
+                            </label>
+                            <button class="btn-delete" type="button">Excluir Jogo</button>
+                        </div>
+                    </article>
+
+                    <article class="saved-game">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.webp" alt="Capa do jogo The Witcher 3">
+                        <div class="saved-game-info">
+                            <h3>The Witcher 3</h3>
+                            <p>Plataforma: PlayStation</p>
+                        </div>
+                        <div class="saved-game-controls">
+                            <label>
+                                <span>Status</span>
+                                <select>
+                                    <option>Vou Jogar</option>
+                                    <option>Tô jogando</option>
+                                    <option selected>Já Zerei</option>
+                                    <option>Desisti</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Horas jogadas</span>
+                                <input type="number" value="89" min="0" step="0.1">
+                            </label>
+                            <button class="btn-delete" type="button">Excluir Jogo</button>
+                        </div>
+                    </article>
+
+                    <article class="saved-game">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp" alt="Capa do jogo Stardew Valley">
+                        <div class="saved-game-info">
+                            <h3>Stardew Valley</h3>
+                            <p>Plataforma: Nintendo Switch</p>
+                        </div>
+                        <div class="saved-game-controls">
+                            <label>
+                                <span>Status</span>
+                                <select>
+                                    <option selected>Vou Jogar</option>
+                                    <option>Tô jogando</option>
+                                    <option>Já Zerei</option>
+                                    <option>Desisti</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Horas jogadas</span>
+                                <input type="number" value="6" min="0" step="0.1">
+                            </label>
+                            <button class="btn-delete" type="button">Excluir Jogo</button>
+                        </div>
+                    </article>
+                </div>
+            </article>
+        </section>
     </main>
     <footer class="site-footer">
         <p>Desenvolvido por Alexandre e Nathan</p>
