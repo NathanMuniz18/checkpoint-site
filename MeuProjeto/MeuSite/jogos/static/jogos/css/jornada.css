@@ -288,6 +288,87 @@ main {
     justify-content: flex-end;
 }
 
+.feedback-group {
+    display: grid;
+    gap: 0.45rem;
+    margin-bottom: 0.7rem;
+}
+
+.feedback {
+    margin: 0.7rem 0 0;
+    border: 1px solid rgba(112, 200, 255, 0.35);
+    background: rgba(35, 183, 255, 0.1);
+    color: #d9ecff;
+    padding: 0.58rem 0.7rem;
+    font-size: 0.9rem;
+}
+
+.feedback--error {
+    border-color: rgba(255, 103, 196, 0.5);
+    background: rgba(255, 79, 205, 0.16);
+    color: #ffe2f4;
+}
+
+.search-results {
+    margin-top: 0.85rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.search-result {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 0.75rem;
+    border: 1px solid rgba(145, 165, 246, 0.27);
+    background: linear-gradient(175deg, rgba(16, 10, 54, 0.95), rgba(8, 5, 31, 0.96));
+    padding: 0.7rem;
+}
+
+.search-result img,
+.search-result-placeholder {
+    width: 86px;
+    height: 112px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.search-result img {
+    object-fit: cover;
+}
+
+.search-result-placeholder {
+    display: grid;
+    place-items: center;
+    font-family: 'Orbitron', 'Verdana', sans-serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.11em;
+    color: #d8e1ff;
+    background: linear-gradient(140deg, rgba(36, 62, 147, 0.55), rgba(61, 17, 99, 0.7));
+}
+
+.search-result-info h3 {
+    margin: 0;
+    font-family: 'Orbitron', 'Verdana', sans-serif;
+    font-size: 1rem;
+}
+
+.search-result-info p {
+    margin: 0.4rem 0 0;
+    color: #ced8ff;
+    font-size: 0.9rem;
+}
+
+.search-result-form {
+    margin-top: 0.65rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.search-result-form .btn-save {
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+
 .btn-save,
 .btn-delete {
     border: 1px solid;
@@ -314,6 +395,21 @@ main {
     transform: translate(-2px, -2px);
     border-color: #ffb1f8;
     box-shadow: 8px 8px 0 rgba(246, 36, 255, 0.2);
+}
+
+.btn-save--small {
+    min-height: 34px;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    box-shadow: none;
+    justify-self: start;
+}
+
+.btn-save--small:hover {
+    transform: translateY(-1px);
+    box-shadow: none;
 }
 
 .saved-games {
@@ -399,11 +495,15 @@ main {
     grid-column: 2;
 }
 
+.saved-game-controls .btn-save--small {
+    grid-column: 1;
+}
+
 .btn-delete {
     color: #ffcaee;
     border-color: rgba(255, 79, 205, 0.58);
-    grid-column: 1 / -1;
-    justify-self: start;
+    grid-column: 2;
+    justify-self: end;
     background: rgba(255, 79, 205, 0.1);
     min-height: 34px;
     padding: 0.45rem 0.65rem;
@@ -721,6 +821,10 @@ main {
         grid-template-columns: 1fr;
     }
 
+    .search-result-form {
+        grid-template-columns: 1fr;
+    }
+
     .saved-game {
         grid-template-columns: 82px minmax(0, 1fr);
         align-items: start;
@@ -744,8 +848,8 @@ main {
     }
 
     .btn-delete {
-        grid-column: 1 / -1;
-        justify-self: start;
+        grid-column: 2;
+        justify-self: end;
     }
 
     .highlights {
@@ -788,6 +892,10 @@ main {
     .saved-game-controls {
         grid-template-columns: minmax(120px, 1fr) 108px;
         gap: 0.5rem;
+    }
+
+    .btn-delete {
+        grid-column: 2;
     }
 
     .btn-save,

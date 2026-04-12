@@ -27,8 +27,8 @@
             <div class="logo">CHECKPOINT</div>
            {% if user.is_authenticated %}
                 <ul class="menu-list menu-list--center">
-                    <li><a href="{% url 'MeuApp:jornada' %}">Jornada</a></li>
-                    <li><a href="{% url 'MeuApp:conquistas' %}">Conquistas</a></li>
+                    <li><a href="{% url 'jogos:jornada' %}">Jornada</a></li>
+                    <li><a href="{% url 'jogos:conquistas' %}">Conquistas</a></li>
                 </ul>
                 <ul class="menu-list menu-list--auth">
                     <li><a href="{% url 'MeuApp:perfil'%}">Editar Perfil</a></li>
@@ -123,13 +123,13 @@
             <article class="welcome-tile welcome-tile--games">
                 <h3>Minhas Conquistas</h3>
                 <p>Confira o progresso de suas conquistas.</p>
-                <a href="{% url 'MeuApp:conquistas' %}">Ver Conquistas</a>
+                <a href="{% url 'jogos:conquistas' %}">Ver Conquistas</a>
             </article>
 
             <article class="welcome-tile welcome-tile--my-games">
                 <h3>Minha Jornada</h3>
                 <p>Acesse sua biblioteca pessoal e continue as partidas que você acompanha.</p>
-                <a href="{% url 'MeuApp:jornada' %}">Abrir minha jornada</a>
+                <a href="{% url 'jogos:jornada' %}">Abrir minha jornada</a>
             </article>
         </section>
         {% endif %}

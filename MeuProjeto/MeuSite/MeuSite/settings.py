@@ -124,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# RAWG (catálogo de jogos)
+RAWG_API_KEY = os.getenv("RAWG_API_KEY", "f0b273f8e805432c9735cecf5c3648fd")
