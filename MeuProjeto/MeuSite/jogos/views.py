@@ -157,6 +157,11 @@ def jornada(request):
         .order_by("-atualizado_em")
     )
 
+    editar_raw = request.GET.get("editar", "").strip()
+    item_em_edicao = int(editar_raw) if editar_raw.isdigit() else None
+    if item_em_edicao and not jogos_salvos.filter(id=item_em_edicao).exists():
+        item_em_edicao = None
+
     return render(
         request,
         "jogos/jornada.html",
@@ -166,5 +171,6 @@ def jornada(request):
             "erro_busca": erro_busca,
             "jogos_salvos": jogos_salvos,
             "status_choices": JogoUsuario.Status.choices,
+            "item_em_edicao": item_em_edicao,
         },
     )

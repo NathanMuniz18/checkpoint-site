@@ -74,19 +74,6 @@
                                     <input type="hidden" name="capa_url" value="{{ jogo.capa_url }}">
                                     <input type="hidden" name="plataforma" value="{{ jogo.plataforma }}">
                                     <input type="hidden" name="slug" value="{{ jogo.slug }}">
-
-                                    <label class="field">
-                                        <span>Status inicial</span>
-                                        <select name="status">
-                                            {% for value, label in status_choices %}
-                                                <option value="{{ value }}">{{ label }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </label>
-                                    <label class="field">
-                                        <span>Horas iniciais</span>
-                                        <input type="number" name="horas_jogadas" value="0" min="0" step="1">
-                                    </label>
                                     <button class="btn-save" type="submit">Adicionar à jornada</button>
                                 </form>
                             </article>
@@ -113,34 +100,48 @@
                 {% if jogos_salvos %}
                     <div class="saved-games">
                         {% for item in jogos_salvos %}
-                            <article class="saved-game">
+                            <article class="saved-game" id="jogo-{{ item.id }}">
                                 {% if item.jogo.capa_url %}
-                                    <img src="{{ item.jogo.capa_url }}" alt="Capa do jogo {{ item.jogo.nome }}" loading="lazy">
+                                    <a class="saved-game-open" href="?editar={{ item.id }}#jogo-{{ item.id }}" aria-label="Editar {{ item.jogo.nome }}">
+                                        <img src="{{ item.jogo.capa_url }}" alt="Capa do jogo {{ item.jogo.nome }}" loading="lazy">
+                                    </a>
                                 {% else %}
                                     <div class="search-result-placeholder">SEM CAPA</div>
                                 {% endif %}
                                 <div class="saved-game-info">
-                                    <h3>{{ item.jogo.nome }}</h3>
+                                    <h3>
+                                        <a class="saved-game-open" href="?editar={{ item.id }}#jogo-{{ item.id }}">
+                                            {{ item.jogo.nome }}
+                                        </a>
+                                    </h3>
                                     <p>Plataforma: {{ item.jogo.plataforma|default:"Não informada" }}</p>
                                 </div>
-                                <form method="post" class="saved-game-controls">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                                    <label>
-                                        <span>Status</span>
-                                        <select name="status">
-                                            {% for value, label in status_choices %}
-                                                <option value="{{ value }}" {% if item.status == value %}selected{% endif %}>{{ label }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </label>
-                                    <label>
-                                        <span>Horas jogadas</span>
-                                        <input type="number" name="horas_jogadas" value="{{ item.horas_jogadas }}" min="0" step="1">
-                                    </label>
-                                    <button class="btn-save btn-save--small" type="submit" name="action" value="update">Salvar</button>
-                                    <button class="btn-delete" type="submit" name="action" value="delete" formnovalidate>Excluir jogo</button>
-                                </form>
+
+                                {% if item_em_edicao == item.id %}
+                                    <form method="post" class="saved-game-controls">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                                        <label>
+                                            <span>Status</span>
+                                            <select name="status">
+                                                {% for value, label in status_choices %}
+                                                    <option value="{{ value }}" {% if item.status == value %}selected{% endif %}>{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                        <label>
+                                            <span>Horas jogadas</span>
+                                            <input type="number" name="horas_jogadas" value="{{ item.horas_jogadas }}" min="0" step="1">
+                                        </label>
+                                        <button class="btn-save btn-save--small" type="submit" name="action" value="update">Salvar</button>
+                                        <button class="btn-delete" type="submit" name="action" value="delete" formnovalidate>Excluir jogo</button>
+                                    </form>
+                                {% else %}
+                                    <div class="saved-game-preview">
+                                        <p><strong>Status:</strong> {{ item.get_status_display }}</p>
+                                        <p><strong>Horas jogadas:</strong> {{ item.horas_jogadas }}h</p>
+                                    </div>
+                                {% endif %}
                             </article>
                         {% endfor %}
                     </div>

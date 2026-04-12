@@ -312,22 +312,23 @@ main {
 .search-results {
     margin-top: 0.85rem;
     display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.65rem;
 }
 
 .search-result {
-    display: grid;
-    grid-template-columns: 86px minmax(0, 1fr);
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
     border: 1px solid rgba(145, 165, 246, 0.27);
     background: linear-gradient(175deg, rgba(16, 10, 54, 0.95), rgba(8, 5, 31, 0.96));
-    padding: 0.7rem;
+    padding: 0.6rem;
 }
 
 .search-result img,
 .search-result-placeholder {
-    width: 86px;
-    height: 112px;
+    width: 100%;
+    height: 170px;
     border: 1px solid rgba(255, 255, 255, 0.24);
 }
 
@@ -348,25 +349,50 @@ main {
 .search-result-info h3 {
     margin: 0;
     font-family: 'Orbitron', 'Verdana', sans-serif;
-    font-size: 1rem;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .search-result-info p {
-    margin: 0.4rem 0 0;
+    margin: 0.32rem 0 0;
     color: #ced8ff;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.search-result-info {
+    min-height: 0;
 }
 
 .search-result-form {
-    margin-top: 0.65rem;
+    margin-top: auto;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    gap: 0;
 }
 
 .search-result-form .btn-save {
-    grid-column: 1 / -1;
-    justify-self: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 36px;
+    height: 36px;
+    padding: 0.5rem 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: none;
+    justify-self: stretch;
+}
+
+.search-result-form .btn-save:hover {
+    transform: translateY(-1px);
+    box-shadow: none;
 }
 
 .btn-save,
@@ -412,6 +438,18 @@ main {
     box-shadow: none;
 }
 
+@media (max-width: 1280px) {
+    .search-results {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1100px) {
+    .search-results {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 .saved-games {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -445,17 +483,65 @@ main {
     box-shadow: 0 8px 16px rgba(2, 2, 12, 0.4);
 }
 
+.saved-game-open {
+    color: inherit;
+    text-decoration: none;
+}
+
+.saved-game-open:hover {
+    color: #ffffff;
+}
+
+.saved-game-open img {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.saved-game-open:hover img {
+    transform: translateY(-1px);
+    border-color: rgba(246, 36, 255, 0.55);
+}
+
 .saved-game-info h3 {
     margin: 0;
     font-family: 'Orbitron', 'Verdana', sans-serif;
     font-size: 1.08rem;
     letter-spacing: 0.03em;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.saved-game-info h3 a {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .saved-game-info p {
     margin: 0.48rem 0 0;
     color: #ced8ff;
     font-size: 0.92rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.saved-game-info {
+    min-width: 0;
+}
+
+.saved-game-preview {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 0.15rem;
+}
+
+.saved-game-preview p {
+    margin: 0;
+    color: #d8e1ff;
+    font-size: 0.88rem;
 }
 
 .saved-game-controls {
@@ -497,13 +583,20 @@ main {
 
 .saved-game-controls .btn-save--small {
     grid-column: 1;
+    width: 100%;
+    justify-self: stretch;
+}
+
+.saved-game-controls .btn-delete {
+    grid-column: 2;
+    width: 100%;
+    justify-self: stretch;
 }
 
 .btn-delete {
     color: #ffcaee;
     border-color: rgba(255, 79, 205, 0.58);
-    grid-column: 2;
-    justify-self: end;
+    justify-self: start;
     background: rgba(255, 79, 205, 0.1);
     min-height: 34px;
     padding: 0.45rem 0.65rem;
@@ -821,8 +914,8 @@ main {
         grid-template-columns: 1fr;
     }
 
-    .search-result-form {
-        grid-template-columns: 1fr;
+    .search-results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .saved-game {
@@ -845,11 +938,6 @@ main {
         grid-template-columns: minmax(130px, 1fr) 116px;
         margin-top: 0.2rem;
         width: min(280px, 100%);
-    }
-
-    .btn-delete {
-        grid-column: 2;
-        justify-self: end;
     }
 
     .highlights {
@@ -894,8 +982,8 @@ main {
         gap: 0.5rem;
     }
 
-    .btn-delete {
-        grid-column: 2;
+    .search-results {
+        grid-template-columns: 1fr;
     }
 
     .btn-save,
