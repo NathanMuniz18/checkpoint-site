@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware' # Adicionado para servir arquivos estáticos em produção
+    "whitenoise.middleware.WhiteNoiseMiddleware", # Adicionado para servir arquivos estáticos em produção
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 # Static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # Diretório onde os arquivos estáticos serão coletados para produção
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # Configuração para otimizar o armazenamento de arquivos estáticos
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #
 
 ROOT_URLCONF = "MeuSite.urls"
 
