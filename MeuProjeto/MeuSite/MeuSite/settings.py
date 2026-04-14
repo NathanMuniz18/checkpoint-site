@@ -21,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-vshats8a*=@mq!ge5t(2pjlarrncslihs_k&1iij!*++4r*+=a"
+#SECRET_KEY = "django-insecure-vshats8a*=@mq!ge5t(2pjlarrncslihs_k&1iij!*++4r*+=a"
+SECRET_KEY = os.environ.get('SECRET_KEY', 'chave-local')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
 CSRF_TRUSTED_ORIGINS = [
 'https://localhost:8000',
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware' # Adicionado para servir arquivos estáticos em produção
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -56,6 +59,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # Diretório onde os arquivos estáticos serão coletados para produção
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # Configuração para otimizar o armazenamento de arquivos estáticos
 
 ROOT_URLCONF = "MeuSite.urls"
 
