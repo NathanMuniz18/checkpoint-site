@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 from .forms import CadastroForm, PerfilForm, PessoaForm
 from .models import Pessoa
 
@@ -78,6 +78,16 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('MeuApp:homepage')
+
+
+@login_required
+def excluir_conta(request):
+    if request.method == 'POST':   # só age se veio do formulário
+        user = request.user        # pega o usuário logado
+        logout(request)            # desloga primeiro
+        user.delete()              # depois deleta do banco
+        return redirect('MeuApp:homepage')  # manda pra home
+    return redirect('MeuApp:perfil')  # se não foi POST, volta pro perfil
 
 
 def registro(request):

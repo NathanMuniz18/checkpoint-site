@@ -9,4 +9,5 @@ urlpatterns = [
     path('registro/',views.registro,name='registro'),
     path('logout/', views.logout_view, name='logout'),
     path('perfil/', views.perfil, name='perfil'),
+    path('excluir-conta/', views.excluir_conta, name='excluir_conta'),
 ]
