@@ -67,7 +67,7 @@
                     </div>
                 {% endif %}
 
-                <form method="post" class="perfil-form" novalidate>
+                <form method="post" class="perfil-form" id="perfil-form" novalidate>
                     {% csrf_token %}
 
                     <div class="field-group">
@@ -106,7 +106,6 @@
 
                 <div class="form-actions">
                     <button type="submit" form="perfil-form" class="save-btn">Salvar Alterações</button>
-
                     <form method="post" action="{% url 'MeuApp:excluir_conta' %}">
                         {% csrf_token %}
                         <button type="submit" class="delete-btn"
