@@ -1,0 +1,12 @@
+Oi,
+
+Recebemos uma solicitacao para redefinir a senha da sua conta no Checkpoint.
+
+Usuario: {{ user.get_username }}
+
+Para criar uma nova senha, acesse o link abaixo:
+{{ protocol }}://{{ domain }}{% url 'MeuApp:redefinir_senha' uidb64=uid token=token %}
+
+Se voce nao solicitou esta alteracao, pode ignorar este e-mail com seguranca.
+
+Equipe Checkpoint

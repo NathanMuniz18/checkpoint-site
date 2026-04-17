@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Perfil</title>
     <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}?v=11">
-    <link rel="stylesheet" href="{% static 'MeuApp/css/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/perfil.css' %}?v=3">
 </head>
 <body class="perfil-page">
     <header class="site-header">
@@ -52,7 +52,7 @@
             <section class="perfil-editor" aria-label="Editar perfil">
                 <div class="editor-header">
                     <h2>Editar Perfil</h2>
-                    <p>Atualize seu username, email e bio.</p>
+                    <p>Atualize seu username, email, bio e senha.</p>
                 </div>
 
                 {% if perfil_salvo %}
@@ -66,6 +66,9 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                <div class="password-reset-link">
+                    <a href="{% url 'MeuApp:recuperar_senha' %}">Redefinir Senha</a>
+                </div>
 
                 <form method="post" class="perfil-form" id="perfil-form" novalidate>
                     {% csrf_token %}

@@ -48,7 +48,6 @@ def perfil(request):
         },
     )
 
-
 def segundaPagina(request):
     return render(request, 'MeuApp/segunda.html')
 

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/login.css' %}?v=4">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <main class="login-box" aria-labelledby="reset-title">
+        <h1 id="reset-title">Checkpoint</h1>
+        <p class="subtitle">Recuperar senha</p>
+        <p class="auth-helper-text">
+            Informe o e-mail cadastrado para receber o link de redefinição.
+        </p>
+
+        {% if form.non_field_errors %}
+            <div class="alert">
+                {% for error in form.non_field_errors %}
+                    <p class="alert-item">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" class="auth-form" novalidate>
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label for="id_email">E-mail</label>
+                <input
+                    type="email"
+                    id="id_email"
+                    name="email"
+                    class="field-control"
+                    autocomplete="email"
+                    value="{{ form.email.value|default_if_none:'' }}"
+                    required
+                >
+                {% for error in form.email.errors %}
+                    <p class="field-error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="login-btn field-control">
+                Enviar link de recuperação
+            </button>
+        </form>
+
+        <div class="register-link">
+            <p><a href="{% url 'MeuApp:login' %}" class="auth-link auth-link--back">Voltar para login</a></p>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

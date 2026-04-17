@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Redefinicao de senha</title>
+</head>
+<body style="margin:0;padding:0;background:#0a0820;font-family:Arial,sans-serif;color:#f2f5ff;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:24px 12px;background:#0a0820;">
+        <tr>
+            <td align="center">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#0f1237;border:1px solid #3b2a69;border-radius:12px;padding:24px;">
+                    <tr>
+                        <td style="font-size:30px;font-weight:700;text-align:center;padding-bottom:10px;">
+                            Checkpoint
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:18px;font-weight:600;padding-bottom:12px;text-align:center;">
+                            Redefinicao de senha
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:15px;line-height:1.6;color:#dce1f2;padding-bottom:12px;">
+                            Recebemos uma solicitacao para redefinir a senha da sua conta.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:15px;line-height:1.6;color:#dce1f2;padding-bottom:12px;">
+                            <strong>Usuario:</strong> {{ user.get_username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:12px 0 20px;">
+                            <a href="{{ protocol }}://{{ domain }}{% url 'MeuApp:redefinir_senha' uidb64=uid token=token %}" style="display:inline-block;padding:12px 22px;background:#ffffff;border:2px solid #f624ff;color:#2a0f42;text-decoration:none;font-weight:700;border-radius:6px;">
+                                Criar nova senha
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:14px;line-height:1.6;color:#aeb6d1;">
+                            Se voce nao solicitou esta alteracao, ignore este e-mail com seguranca.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

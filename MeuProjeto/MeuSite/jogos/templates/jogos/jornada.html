@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint | Jornada</title>
-    <link rel="stylesheet" href="{% static 'jogos/css/jornada.css' %}?v=20260411b">
+    <link rel="stylesheet" href="{% static 'jogos/css/jornada.css' %}?v=20260411c">
     <link rel="stylesheet" href="{% static 'MeuApp/css/home.css' %}?v=11">
 </head>
 <body>
@@ -109,20 +109,14 @@
                 {% if jogos_salvos %}
                     <div class="saved-games">
                         {% for item in jogos_salvos %}
-                            <article class="saved-game" id="jogo-{{ item.id }}">
+                            <article class="saved-game {% if item_em_edicao != item.id %}saved-game--clickable{% endif %}" id="jogo-{{ item.id }}">
                                 {% if item.jogo.capa_url %}
-                                    <a class="saved-game-open" href="?editar={{ item.id }}#jogo-{{ item.id }}" aria-label="Editar {{ item.jogo.nome }}">
-                                        <img src="{{ item.jogo.capa_url }}" alt="Capa do jogo {{ item.jogo.nome }}" loading="lazy">
-                                    </a>
+                                    <img src="{{ item.jogo.capa_url }}" alt="Capa do jogo {{ item.jogo.nome }}" loading="lazy">
                                 {% else %}
                                     <div class="search-result-placeholder">SEM CAPA</div>
                                 {% endif %}
                                 <div class="saved-game-info">
-                                    <h3>
-                                        <a class="saved-game-open" href="?editar={{ item.id }}#jogo-{{ item.id }}">
-                                            {{ item.jogo.nome }}
-                                        </a>
-                                    </h3>
+                                    <h3>{{ item.jogo.nome }}</h3>
                                     <p>Plataforma: {{ item.jogo.plataforma|default:"Não informada" }}</p>
                                 </div>
 
@@ -150,6 +144,11 @@
                                         <p><strong>Status:</strong> {{ item.get_status_display }}</p>
                                         <p><strong>Horas jogadas:</strong> {{ item.horas_jogadas }}h</p>
                                     </div>
+                                    <a
+                                        class="saved-game-overlay"
+                                        href="?editar={{ item.id }}#jogo-{{ item.id }}"
+                                        aria-label="Editar {{ item.jogo.nome }}"
+                                    ></a>
                                 {% endif %}
                             </article>
                         {% endfor %}

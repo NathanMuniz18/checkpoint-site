@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senha Alterada</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/login.css' %}?v=4">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <main class="login-box" aria-labelledby="complete-title">
+        <h1 id="complete-title">Checkpoint</h1>
+        <p class="subtitle">Senha redefinida</p>
+        <p class="status-text">
+            Sua senha foi alterada com sucesso.
+        </p>
+        <p class="status-text">
+            Agora você já pode acessar sua conta com a nova senha.
+        </p>
+
+        <div class="action-links">
+            <p><a href="{% url 'MeuApp:login' %}" class="auth-link auth-link--back">Ir para login</a></p>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

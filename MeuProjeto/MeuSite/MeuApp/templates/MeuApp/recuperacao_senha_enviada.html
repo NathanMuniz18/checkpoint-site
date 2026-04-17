@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-mail Enviado</title>
+    <link rel="stylesheet" href="{% static 'MeuApp/css/login.css' %}?v=4">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <main class="login-box" aria-labelledby="done-title">
+        <h1 id="done-title">Checkpoint</h1>
+        <p class="subtitle">Verifique seu e-mail</p>
+        {%if not user.is_authenticated %}
+        <p class="status-text">
+            Se existir uma conta com o e-mail informado, enviamos um link de redefinição de senha.
+        </p>
+        {%else %}
+        <p class="status-text">
+            Enviamos um link de redefinição de senha para o e-mail associado à sua conta.
+        </p>    
+        {% endif %}
+        <p class="status-text">
+            Confira sua caixa de entrada e também a pasta de spam.
+        </p>
+
+        <div class="action-links">
+            <p><a href="{% url 'MeuApp:login' %}" class="auth-link auth-link--back">Voltar para login</a></p>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

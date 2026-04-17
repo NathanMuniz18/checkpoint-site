@@ -458,6 +458,7 @@ main {
 }
 
 .saved-game {
+    position: relative;
     display: grid;
     grid-template-columns: 92px minmax(0, 1fr);
     gap: 0.85rem 0.95rem;
@@ -466,6 +467,10 @@ main {
     background: linear-gradient(175deg, rgba(16, 10, 54, 0.96), rgba(8, 5, 31, 0.96));
     padding: 0.78rem;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.saved-game--clickable {
+    cursor: pointer;
 }
 
 .saved-game:hover {
@@ -542,6 +547,22 @@ main {
     margin: 0;
     color: #d8e1ff;
     font-size: 0.88rem;
+}
+
+.saved-game-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    text-decoration: none;
+}
+
+.saved-game--clickable:focus-within {
+    border-color: rgba(35, 183, 255, 0.62);
+    box-shadow: 0 0 0 3px rgba(35, 183, 255, 0.25);
+}
+
+.saved-game-overlay:focus-visible {
+    outline: none;
 }
 
 .saved-game-controls {

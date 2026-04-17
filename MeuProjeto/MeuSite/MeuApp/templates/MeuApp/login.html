@@ -4,58 +4,74 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{% static 'MeuApp/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'MeuApp/css/login.css' %}?v=4">
 </head>
 <body>
 
 <div class="login-wrapper">
-    
-    <div class="login-box">
-
-        <h1>Checkpoint</h1>
+    <main class="login-box" aria-labelledby="login-title">
+        <h1 id="login-title">Checkpoint</h1>
         <p class="subtitle">Faça o Login</p>
 
         {% if form.errors %}
-            <div class="alert" style="color: #d93025; background-color: #fce8e6; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px;">
+            <div class="alert">
                 {% for field in form %}
                     {% for error in field.errors %}
-                        <p style="margin: 0; padding-bottom: 4px;">
+                        <p class="alert-item">
                             <strong>{{ field.label }}:</strong> {{ error }}
                         </p>
                     {% endfor %}
                 {% endfor %}
 
                 {% for error in form.non_field_errors %}
-                    <p style="margin: 0;">{{ error }}</p>
+                    <p class="alert-item">{{ error }}</p>
                 {% endfor %}
             </div>
         {% endif %}
 
-        <form method="POST">
+        <form method="POST" class="auth-form" novalidate>
             {% csrf_token %}
 
             <div class="input-group">
-                <label>Usuário</label>
-                <input type="text" name="username" required>
+                <label for="id_username">Usuário</label>
+                <input
+                    type="text"
+                    id="id_username"
+                    name="username"
+                    class="field-control"
+                    autocomplete="username"
+                    value="{{ form.username.value|default_if_none:'' }}"
+                    required
+                >
             </div>
 
             <div class="input-group">
-                <label>Senha</label>
-                <input type="password" name="password" required>
+                <label for="id_password">Senha</label>
+                <input
+                    type="password"
+                    id="id_password"
+                    name="password"
+                    class="field-control"
+                    autocomplete="current-password"
+                    required
+                >
             </div>
+            <div class="forgot-password">
+                <a class="forgot-password-link" href="{% url 'MeuApp:recuperar_senha' %}">Esqueceu a senha?</a>
+            </div>
+            
 
-            <button type="submit" class="login-btn">Entrar</button>
+            <button type="submit" class="login-btn field-control">Entrar</button>
         </form>
 
         <div class="register-link">
-                <ul><span>Não tem conta?</span><a href="{% url 'MeuApp:registro' %}" class="auth-link">Criar conta</a></ul>
-                <ul><a href="{% url 'MeuApp:homepage' %}" class="auth-link">Voltar para Início</a></ul>
+            <p><span>Não tem conta?</span><a href="{% url 'MeuApp:registro' %}" class="auth-link">Criar conta</a></p>
+            <p><a href="{% url 'MeuApp:homepage' %}" class="auth-link auth-link--back">Voltar para Início</a></p>
         </div>
-
-    </div>
+    </main>
 </div>
 
 </body>
 </html>
-
