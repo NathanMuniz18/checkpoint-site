@@ -292,6 +292,7 @@ MeuApp/templates/MeuApp/emails/
 
 ---
 OBS: esse readme e alguma coisas do codigo foram feitas com ajuda de ia 
+se o site estiver 15 minutos sem ninguem mexendo ele cai, entao quando for entrar a primeira vez ele pode demorar um pouco pra carregar por conta da nossa hospedagem
 <p align="center">
   Desenvolvido por <strong>Alexandre</strong> e <strong>Nathan</strong>
 </p>
