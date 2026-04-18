@@ -12,7 +12,11 @@
 <div class="login-wrapper">
     <main class="login-box" aria-labelledby="reset-title">
         <h1 id="reset-title">Checkpoint</h1>
-        <p class="subtitle">Recuperar senha</p>
+        {%if user.is_authenticated %}
+            <p class="subtitle">Redefinir senha</p>
+        {% else %}
+            <p class="subtitle">Recuperar senha</p>
+        {% endif %}
         <p class="auth-helper-text">
             Informe o e-mail cadastrado para receber o link de redefinição.
         </p>
